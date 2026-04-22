@@ -10,6 +10,7 @@ A Spring Boot e-commerce REST API with JWT authentication.
 - Spring Security + JWT
 - H2 in-memory database
 - Maven
+- Docker
 
 ---
 
@@ -98,6 +99,47 @@ curl http://<EC2-PUBLIC-IP>:8080/api/products \
 |------|-------|----------|
 | Admin | `admin@shop.com` | `admin123` |
 | User | `user@shop.com` | `user123` |
+
+---
+
+## Run with Docker (Alternative)
+
+### 1. Install Docker
+
+```bash
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker ubuntu
+newgrp docker
+```
+
+### 2. Build the Docker image
+
+```bash
+docker build -t ecommerce-app .
+```
+
+### 3. Run the container
+
+```bash
+docker run -d -p 8080:8080 --name ecommerce ecommerce-app
+```
+
+The app will be available at **http://\<EC2-PUBLIC-IP\>:8080**
+
+### Docker management commands
+
+```bash
+docker ps                      # list running containers
+docker logs ecommerce          # view logs
+docker logs -f ecommerce       # live logs
+docker restart ecommerce       # restart container
+docker stop ecommerce          # stop container
+docker rm ecommerce            # remove container
+docker rmi ecommerce-app       # remove image
+```
 
 ---
 
