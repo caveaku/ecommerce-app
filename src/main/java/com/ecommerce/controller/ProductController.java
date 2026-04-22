@@ -69,6 +69,6 @@ public class ProductController {
             p.setActive(false); // soft delete
             productRepo.save(p);
             return ResponseEntity.<Void>noContent().build();
-        }).orElse(ResponseEntity.notFound().build());
+        }).orElse(ResponseEntity.<Void>notFound().build());
     }
 }
